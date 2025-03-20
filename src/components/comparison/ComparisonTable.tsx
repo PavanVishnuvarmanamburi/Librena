@@ -16,11 +16,17 @@ interface ComparisonTableProps {
   libraries: Library[];
 }
 
+interface AttributeDefinition {
+  key: keyof Library;
+  label: string;
+  isArray?: boolean;
+}
+
 export const ComparisonTable: React.FC<ComparisonTableProps> = ({ libraries }) => {
   if (libraries.length === 0) return null;
 
   // Create a list of all possible attributes to compare
-  const attributes = [
+  const attributes: AttributeDefinition[] = [
     { key: 'name', label: 'Name' },
     { key: 'version', label: 'Version' },
     { key: 'category', label: 'Category' },
@@ -36,7 +42,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ libraries }) =
 
   const renderCellValue = (
     library: Library,
-    attribute: { key: keyof Library; label: string; isArray?: boolean }
+    attribute: AttributeDefinition
   ) => {
     const value = library[attribute.key];
 
@@ -78,7 +84,7 @@ export const ComparisonTable: React.FC<ComparisonTableProps> = ({ libraries }) =
         </TableHeader>
         <TableBody>
           {attributes.map((attribute) => (
-            <TableRow key={attribute.key} className="hover:bg-gray-50 dark:hover:bg-gray-900/50">
+            <TableRow key={attribute.key as string} className="hover:bg-gray-50 dark:hover:bg-gray-900/50">
               <TableCell className="font-medium bg-gray-50 dark:bg-gray-900/30">
                 {attribute.label}
               </TableCell>
