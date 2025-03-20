@@ -207,14 +207,14 @@ const Index = () => {
                   </div>
                   
                   <Select
-                    value={category || ''}
-                    onValueChange={(value) => setCategory(value || null)}
+                    value={category || 'all'}
+                    onValueChange={(value) => setCategory(value === 'all' ? null : value)}
                   >
                     <SelectTrigger className="w-full sm:w-48">
                       <SelectValue placeholder="All Categories" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">All Categories</SelectItem>
+                      <SelectItem value="all">All Categories</SelectItem>
                       {categories.map((cat) => (
                         <SelectItem key={cat} value={cat}>
                           {cat}
