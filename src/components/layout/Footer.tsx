@@ -31,7 +31,7 @@ export const Footer = () => {
                 <Linkedin size={20} />
               </a>
               <a 
-                href="mailto:contact@librena.com" 
+                href="mailto:rbsastryk@gmail.com" 
                 className="text-gray-500 hover:text-primary transition-colors"
               >
                 <Mail size={20} />
@@ -67,17 +67,17 @@ export const Footer = () => {
             <h3 className="text-lg font-medium pt-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/terms" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/legal?section=terms" className="text-muted-foreground hover:text-primary transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/legal?section=privacy" className="text-muted-foreground hover:text-primary transition-colors">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/patents" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/legal?section=patents" className="text-muted-foreground hover:text-primary transition-colors">
                   Patents & Certifications
                 </Link>
               </li>
@@ -90,16 +90,16 @@ export const Footer = () => {
               <div className="flex items-start">
                 <MapPin size={18} className="mr-2 mt-0.5 flex-shrink-0" />
                 <p className="text-sm">
-                  1000 Hilltop Circle, Baltimore, MD 21250
+                  28 stonecroft rd, Baltimore, MD, 21229
                 </p>
               </div>
               <div className="flex items-center">
                 <Phone size={18} className="mr-2 flex-shrink-0" />
-                <p className="text-sm">(410) 455-1000</p>
+                <p className="text-sm">+1-6674331296</p>
               </div>
               <div className="flex items-center">
                 <Mail size={18} className="mr-2 flex-shrink-0" />
-                <p className="text-sm">contact@librena.com</p>
+                <p className="text-sm">rbsastryk@gmail.com</p>
               </div>
             </div>
             

@@ -1,9 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, ChevronDown, LogIn, UserPlus, LogOut, User } from 'lucide-react';
+import { Menu, X, LogIn, UserPlus, LogOut, User, Home } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,24 +13,9 @@ import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 
-const categories = [
-  'UI Libraries',
-  'State Management',
-  'Data Fetching',
-  'Routing',
-  'Styling',
-  'Testing',
-  'Form Handling',
-  'Animation',
-  'Charts',
-  'Date/Time',
-];
-
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const { isAuthenticated, user, logout } = useAuth();
   const { toast } = useToast();
@@ -45,20 +29,6 @@ export const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!isAuthenticated) {
-      toast({
-        title: 'Authentication required',
-        description: 'Please login to search for libraries.',
-        variant: 'destructive',
-      });
-      return;
-    }
-    
-    navigate(`/?search=${searchQuery}${selectedCategory ? `&category=${selectedCategory}` : ''}`);
-  };
 
   const handleCompareClick = () => {
     if (!isAuthenticated) {
@@ -93,44 +63,15 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            {isAuthenticated && (
-              <form onSubmit={handleSearch} className="flex items-center space-x-2">
-                <Input
-                  type="text"
-                  placeholder="Search libraries..."
-                  className="w-48 lg:w-60 h-9 bg-white/80 dark:bg-theme-dark/50 focus-visible:ring-1 focus-visible:ring-theme-hover transition-all"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="flex items-center gap-1 h-9">
-                      {selectedCategory || 'Categories'}
-                      <ChevronDown size={16} />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem onClick={() => setSelectedCategory(null)}>
-                      All Categories
-                    </DropdownMenuItem>
-                    {categories.map((category) => (
-                      <DropdownMenuItem 
-                        key={category}
-                        onClick={() => setSelectedCategory(category)}
-                      >
-                        {category}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                
-                <Button type="submit" size="sm" className="h-9">
-                  <Search size={16} className="mr-2" />
-                  Search
-                </Button>
-              </form>
-            )}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="flex items-center bg-transparent hover:bg-transparent"
+              onClick={() => navigate('/')}
+            >
+              <Home size={16} className="mr-2" />
+              Home
+            </Button>
             
             <Button 
               onClick={handleCompareClick} 
@@ -191,44 +132,14 @@ export const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white dark:bg-theme-dark shadow-lg">
           <div className="px-4 py-4 space-y-4">
-            {isAuthenticated && (
-              <form onSubmit={handleSearch} className="flex flex-col space-y-2">
-                <Input
-                  type="text"
-                  placeholder="Search libraries..."
-                  className="w-full"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
-                
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" size="sm" className="w-full flex items-center justify-between">
-                      {selectedCategory || 'Categories'}
-                      <ChevronDown size={16} />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem onClick={() => setSelectedCategory(null)}>
-                      All Categories
-                    </DropdownMenuItem>
-                    {categories.map((category) => (
-                      <DropdownMenuItem 
-                        key={category}
-                        onClick={() => setSelectedCategory(category)}
-                      >
-                        {category}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-                
-                <Button type="submit" className="w-full">
-                  <Search size={16} className="mr-2" />
-                  Search
-                </Button>
-              </form>
-            )}
+            <Button 
+              variant="ghost" 
+              className="w-full justify-start"
+              onClick={() => navigate('/')}
+            >
+              <Home size={16} className="mr-2" />
+              Home
+            </Button>
             
             <Button 
               onClick={handleCompareClick}
