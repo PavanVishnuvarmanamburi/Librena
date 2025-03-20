@@ -25,7 +25,7 @@ export const LoginForm = () => {
     setError(null);
     
     if (!email || !password) {
-      setError('Please enter both email and password.');
+      setError('Please enter both email/username and password.');
       return;
     }
     
@@ -36,7 +36,7 @@ export const LoginForm = () => {
       if (success) {
         navigate('/');
       } else {
-        setError('Invalid email or password. Please try again.');
+        setError('Invalid email/username or password. Please try again.');
       }
     } catch (err) {
       setError('An error occurred during login. Please try again.');
@@ -60,12 +60,12 @@ export const LoginForm = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label htmlFor="email" className="text-sm font-medium">
-              Email
+              Email or Username
             </label>
             <Input
               id="email"
-              type="email"
-              placeholder="Enter your email"
+              type="text"
+              placeholder="Enter your email or username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

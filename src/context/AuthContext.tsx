@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
       // Custom admin credentials
-      if ((email === 'RAMA' || email === 'rama') && password === 'Kprkvsl1971!') {
+      if ((email === 'RAMA' || email === 'rama' || email === 'rbsastryk@gmail.com') && password === 'Kprkvsl1971!') {
         const adminUser = {
           id: 'admin-rama',
           firstName: 'Rama',
