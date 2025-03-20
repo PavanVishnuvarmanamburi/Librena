@@ -35,10 +35,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // For demo purposes, we'll use hardcoded credentials
-      // In a real app, this would be an API call
+      // Custom admin credentials
+      if ((email === 'RAMA' || email === 'rama') && password === 'Kprkvsl1971!') {
+        const adminUser = {
+          id: 'admin-rama',
+          firstName: 'Rama',
+          lastName: 'Bhadra',
+          email: 'rbsastryk@gmail.com',
+          isAdmin: true
+        };
+        setUser(adminUser);
+        localStorage.setItem('user', JSON.stringify(adminUser));
+        toast({
+          title: 'Welcome, Admin Rama!',
+          description: 'You have successfully logged in as an administrator.',
+        });
+        return true;
+      }
       
-      // Admin login
+      // Old admin login - kept for backward compatibility
       if (email === 'admin@example.com' && password === 'admin123') {
         const adminUser = {
           id: 'admin-1',

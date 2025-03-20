@@ -32,7 +32,8 @@ const Login = () => {
           <div className="mt-8 text-center text-sm text-muted-foreground">
             <p>
               For demo purposes, use these credentials: <br />
-              Admin: <strong>admin@example.com</strong> / <strong>admin123</strong> <br />
+              Admin: <strong>RAMA</strong> / <strong>Kprkvsl1971!</strong> <br />
+              Alternative Admin: <strong>admin@example.com</strong> / <strong>admin123</strong> <br />
               Regular user: Any email with a password of at least 6 characters
             </p>
           </div>
