@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { 
@@ -15,6 +14,8 @@ import {
   BookOpen
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 import {
   BarChart,
   Bar,
@@ -30,6 +31,13 @@ import {
 } from 'recharts';
 
 const About = () => {
+  const { toast } = useToast();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [subject, setSubject] = useState('');
+  const [message, setMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   // Mock data for charts
   const techStackData = [
     { name: 'React', value: 40 },
@@ -47,6 +55,25 @@ const About = () => {
   ];
   
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // In a real application, this would call an API to send an email
+    // For now, we'll simulate a successful submission
+    setTimeout(() => {
+      toast({
+        title: "Message sent successfully",
+        description: "Thank you for your message. I'll get back to you soon!",
+      });
+      setName('');
+      setEmail('');
+      setSubject('');
+      setMessage('');
+      setIsSubmitting(false);
+    }, 1500);
+  };
   
   return (
     <div className="flex flex-col min-h-screen">
@@ -71,11 +98,11 @@ const About = () => {
                       <div className="space-y-4">
                         <div className="flex items-center space-x-3">
                           <User className="h-5 w-5" />
-                          <span>John Doe</span>
+                          <span>Rama Bhadra Sastry Kolluri</span>
                         </div>
                         <div className="flex items-center space-x-3">
                           <GraduationCap className="h-5 w-5" />
-                          <span>Computer Science, UMBC</span>
+                          <span>Software Engineering, UMBC</span>
                         </div>
                         <div className="flex items-center space-x-3">
                           <Briefcase className="h-5 w-5" />
@@ -88,7 +115,7 @@ const About = () => {
                       <h3 className="text-lg font-semibold mb-3">Connect</h3>
                       <div className="flex space-x-3">
                         <a 
-                          href="https://github.com" 
+                          href="https://github.com/KRBSASTRY" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="bg-white/20 p-2 rounded-full hover:bg-white/30 transition-colors"
@@ -96,7 +123,7 @@ const About = () => {
                           <Github className="h-5 w-5" />
                         </a>
                         <a 
-                          href="https://linkedin.com" 
+                          href="https://www.linkedin.com/in/rama-bhadra-sastry-kolluri-0150932ab" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="bg-white/20 p-2 rounded-full hover:bg-white/30 transition-colors"
@@ -104,10 +131,16 @@ const About = () => {
                           <Linkedin className="h-5 w-5" />
                         </a>
                         <a 
-                          href="mailto:contact@librena.com" 
+                          href="mailto:rbsastryk@gmail.com" 
                           className="bg-white/20 p-2 rounded-full hover:bg-white/30 transition-colors"
                         >
                           <Mail className="h-5 w-5" />
+                        </a>
+                        <a 
+                          href="tel:+16674331296" 
+                          className="bg-white/20 p-2 rounded-full hover:bg-white/30 transition-colors"
+                        >
+                          <Phone className="h-5 w-5" />
                         </a>
                       </div>
                     </div>
@@ -317,10 +350,10 @@ const About = () => {
                     <div>
                       <p className="font-medium">Email</p>
                       <a 
-                        href="mailto:contact@librena.com" 
+                        href="mailto:rbsastryk@gmail.com" 
                         className="text-blue-600 hover:text-blue-800"
                       >
-                        contact@librena.com
+                        rbsastryk@gmail.com
                       </a>
                     </div>
                   </div>
@@ -330,10 +363,10 @@ const About = () => {
                     <div>
                       <p className="font-medium">Phone</p>
                       <a 
-                        href="tel:+14104551000" 
+                        href="tel:+16674331296" 
                         className="text-blue-600 hover:text-blue-800"
                       >
-                        (410) 455-1000
+                        +1 (667) 433-1296
                       </a>
                     </div>
                   </div>
@@ -343,12 +376,12 @@ const About = () => {
                     <div>
                       <p className="font-medium">GitHub</p>
                       <a 
-                        href="https://github.com/librena" 
+                        href="https://github.com/KRBSASTRY" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:text-blue-800"
                       >
-                        github.com/librena
+                        github.com/KRBSASTRY
                       </a>
                     </div>
                   </div>
@@ -358,12 +391,12 @@ const About = () => {
                     <div>
                       <p className="font-medium">LinkedIn</p>
                       <a 
-                        href="https://linkedin.com/in/librena" 
+                        href="https://www.linkedin.com/in/rama-bhadra-sastry-kolluri-0150932ab" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:text-blue-800"
                       >
-                        linkedin.com/in/librena
+                        linkedin.com/in/rama-bhadra-sastry-kolluri-0150932ab
                       </a>
                     </div>
                   </div>
@@ -373,16 +406,19 @@ const About = () => {
               <div className="glass-card p-8 rounded-xl">
                 <h3 className="text-xl font-semibold mb-6">Send a Message</h3>
                 
-                <form className="space-y-4">
+                <form className="space-y-4" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium">
                         Name
                       </label>
-                      <input
+                      <Input
                         id="name"
                         type="text"
                         placeholder="Your name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
@@ -391,10 +427,13 @@ const About = () => {
                       <label htmlFor="email" className="text-sm font-medium">
                         Email
                       </label>
-                      <input
+                      <Input
                         id="email"
                         type="email"
                         placeholder="Your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
                     </div>
@@ -404,10 +443,13 @@ const About = () => {
                     <label htmlFor="subject" className="text-sm font-medium">
                       Subject
                     </label>
-                    <input
+                    <Input
                       id="subject"
                       type="text"
                       placeholder="Message subject"
+                      value={subject}
+                      onChange={(e) => setSubject(e.target.value)}
+                      required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                   </div>
@@ -420,12 +462,15 @@ const About = () => {
                       id="message"
                       placeholder="Your message"
                       rows={4}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      required
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     ></textarea>
                   </div>
                   
-                  <Button type="submit" className="w-full">
-                    Send Message
+                  <Button type="submit" className="w-full" disabled={isSubmitting}>
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </div>

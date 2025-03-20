@@ -3,8 +3,17 @@ import React from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { LoginForm } from '@/components/auth/LoginForm';
+import { useAuth } from '@/context/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
+  const { isAuthenticated } = useAuth();
+  
+  // If user is already authenticated, redirect to home page
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+  
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />

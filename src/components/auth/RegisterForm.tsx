@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/context/AuthContext';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export const RegisterForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -18,6 +19,7 @@ export const RegisterForm = () => {
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState<string | null>(null);
   
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -40,8 +42,10 @@ export const RegisterForm = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError(null);
     
     if (!validateForm()) {
+      setFormError('Please fill in all required fields correctly.');
       return;
     }
     
@@ -57,7 +61,11 @@ export const RegisterForm = () => {
       
       if (success) {
         navigate('/');
+      } else {
+        setFormError('Registration failed. Please try again.');
       }
+    } catch (error) {
+      setFormError('An unexpected error occurred. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -69,6 +77,12 @@ export const RegisterForm = () => {
         <CardTitle className="text-center text-2xl">Create an account</CardTitle>
       </CardHeader>
       <CardContent>
+        {formError && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>{formError}</AlertDescription>
+          </Alert>
+        )}
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
