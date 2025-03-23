@@ -54,10 +54,10 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				theme: {
-					dark: '#010B12',
-					hover: '#2BC20E',
-					highlight: '#9CFF00',
-					shadow: '#39FF13'
+					dark: '#172d67',
+					hover: '#8c15e9',
+					highlight: '#22ddd2',
+					shadow: '#d4f0fc'
 				}
 			},
 			borderRadius: {
@@ -66,8 +66,8 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			fontFamily: {
-				sans: ['SF Pro Display', 'system-ui', 'sans-serif'],
-				mono: ['SF Mono', 'monospace']
+				sans: ['Consolas', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', 'monospace'],
+				mono: ['Consolas', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', 'monospace']
 			},
 			keyframes: {
 				'accordion-down': {
