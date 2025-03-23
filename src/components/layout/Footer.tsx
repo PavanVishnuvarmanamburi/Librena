@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import { Github, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 export const Footer = () => {
+  // Function to handle scrolling to top when clicking legal links
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <footer className="bg-gray-50 dark:bg-theme-dark border-t border-gray-200 dark:border-gray-800">
       <div className="container mx-auto px-6 py-12">
@@ -67,17 +72,29 @@ export const Footer = () => {
             <h3 className="text-lg font-medium pt-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/legal?section=terms" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link 
+                  to="/legal?section=terms" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  onClick={scrollToTop}
+                >
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link to="/legal?section=privacy" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link 
+                  to="/legal?section=privacy" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  onClick={scrollToTop}
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link to="/legal?section=patents" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link 
+                  to="/legal?section=patents" 
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                  onClick={scrollToTop}
+                >
                   Patents & Certifications
                 </Link>
               </li>

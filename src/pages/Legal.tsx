@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
@@ -9,7 +8,10 @@ const Legal = () => {
   const [searchParams] = useSearchParams();
   const section = searchParams.get('section') || 'terms';
 
-  // Define content for different legal sections
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [section]);
+
   const legalContent = {
     terms: {
       title: 'Terms of Service',
