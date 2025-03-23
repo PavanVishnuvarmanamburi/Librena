@@ -54,10 +54,10 @@ export default {
 					foreground: 'hsl(var(--card-foreground))'
 				},
 				theme: {
-					dark: '#172d67',
-					hover: '#8c15e9',
-					highlight: '#22ddd2',
-					shadow: '#d4f0fc'
+					dark: '#00181a',
+					hover: '#00989b',
+					highlight: '#00585a',
+					shadow: '#dcdedd'
 				}
 			},
 			borderRadius: {
