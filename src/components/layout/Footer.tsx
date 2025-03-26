@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Github, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 export const Footer = () => {
-  // Function to handle scrolling to top when clicking links
+  // Function to handle scrolling to top when clicking legal links
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
@@ -48,37 +48,22 @@ export const Footer = () => {
             <h3 className="text-lg font-medium">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link 
-                  to="/" 
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  onClick={scrollToTop}
-                >
+                <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/about" 
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  onClick={scrollToTop}
-                >
+                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link 
-                  to="/comparison" 
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                  onClick={scrollToTop}
-                >
+                <Link to="/comparison" className="text-muted-foreground hover:text-primary transition-colors">
                   Compare Libraries
                 </Link>
               </li>
               <li>
-                <a 
-                  href="#features" 
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
+                <a href="#features" className="text-muted-foreground hover:text-primary transition-colors">
                   Features
                 </a>
               </li>
