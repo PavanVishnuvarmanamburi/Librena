@@ -1,23 +1,27 @@
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X, LogIn, UserPlus, LogOut, User, Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, LogIn, UserPlus, LogOut, User, Home } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { useAuth } from '@/context/AuthContext';
-import { useToast } from '@/hooks/use-toast';
-import { cn } from '@/lib/utils';
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/context/AuthContext";
+import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const { isAuthenticated, user, logout } = useAuth();
+  const { user, logout } = useAuth();
+  const isAuthenticated = !!user;
+  useEffect(() => {
+    console.log("🧠 Navbar user session:", user);
+  }, [user]);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -26,28 +30,30 @@ export const Navbar = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleCompareClick = () => {
     if (!isAuthenticated) {
       toast({
-        title: 'Authentication required',
-        description: 'You must log in before comparing libraries.',
-        variant: 'destructive',
+        title: "Authentication required",
+        description: "You must log in before comparing libraries.",
+        variant: "destructive",
       });
       return;
     }
-    
-    navigate('/comparison');
+
+    navigate("/comparison");
   };
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'bg-white/80 dark:bg-theme-dark/80 backdrop-blur-lg shadow-md' : 'bg-transparent'
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        isScrolled
+          ? "bg-white/80 dark:bg-theme-dark/80 backdrop-blur-lg shadow-md"
+          : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 md:px-6">
@@ -63,24 +69,24 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="flex items-center bg-transparent hover:bg-transparent"
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
             >
               <Home size={16} className="mr-2" />
               Home
             </Button>
-            
-            <Button 
-              onClick={handleCompareClick} 
+
+            <Button
+              onClick={handleCompareClick}
               variant="default"
               className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white button-hover"
             >
               Compare Libraries
             </Button>
-            
+
             {isAuthenticated ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -90,11 +96,11 @@ export const Navbar = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  <DropdownMenuItem onClick={() => navigate("/profile")}>
                     Profile
                   </DropdownMenuItem>
                   {user?.isAdmin && (
-                    <DropdownMenuItem onClick={() => navigate('/admin')}>
+                    <DropdownMenuItem onClick={() => navigate("/admin")}>
                       Admin Panel
                     </DropdownMenuItem>
                   )}
@@ -106,11 +112,28 @@ export const Navbar = () => {
               </DropdownMenu>
             ) : (
               <div className="flex items-center space-x-2">
-                <Button variant="ghost" size="sm" onClick={() => navigate('/login')}>
-                  <LogIn size={16} className="mr-2" />
-                  Login
-                </Button>
-                <Button variant="outline" size="sm" onClick={() => navigate('/register')}>
+                {user ? (
+                  <>
+                    <span className="text-sm font-medium">
+                      Welcome, {user.firstName}!
+                    </span>
+                    <Button variant="outline" onClick={logout}>
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button asChild variant="ghost">
+                      <Link to="/login">Login</Link>
+                    </Button>
+                  </>
+                )}
+
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => navigate("/register")}
+                >
                   <UserPlus size={16} className="mr-2" />
                   Sign Up
                 </Button>
@@ -132,46 +155,66 @@ export const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white dark:bg-theme-dark shadow-lg">
           <div className="px-4 py-4 space-y-4">
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               className="w-full justify-start"
-              onClick={() => navigate('/')}
+              onClick={() => navigate("/")}
             >
               <Home size={16} className="mr-2" />
               Home
             </Button>
-            
-            <Button 
+
+            <Button
               onClick={handleCompareClick}
               className="w-full bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white"
             >
               Compare Libraries
             </Button>
-            
+
             <div className="pt-2 border-t">
               {isAuthenticated ? (
                 <div className="space-y-2">
-                  <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/profile')}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => navigate("/profile")}
+                  >
                     <User size={16} className="mr-2" />
                     Profile
                   </Button>
                   {user?.isAdmin && (
-                    <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/admin')}>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start"
+                      onClick={() => navigate("/admin")}
+                    >
                       Admin Panel
                     </Button>
                   )}
-                  <Button variant="ghost" className="w-full justify-start" onClick={logout}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={logout}
+                  >
                     <LogOut size={16} className="mr-2" />
                     Logout
                   </Button>
                 </div>
               ) : (
                 <div className="flex flex-col space-y-2">
-                  <Button variant="ghost" className="w-full" onClick={() => navigate('/login')}>
+                  <Button
+                    variant="ghost"
+                    className="w-full"
+                    onClick={() => navigate("/login")}
+                  >
                     <LogIn size={16} className="mr-2" />
                     Login
                   </Button>
-                  <Button variant="outline" className="w-full" onClick={() => navigate('/register')}>
+                  <Button
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => navigate("/register")}
+                  >
                     <UserPlus size={16} className="mr-2" />
                     Sign Up
                   </Button>

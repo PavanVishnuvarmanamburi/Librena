@@ -4,13 +4,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBIXa1i7ZMQmGprUEk_EKv2ptKjcxERWxQ",
-  authDomain: "librena-3cc75.firebaseapp.com",
-  projectId: "librena-3cc75",
-  storageBucket: "librena-3cc75.firebasestorage.app",
-  messagingSenderId: "654618924120",
-  appId: "1:654618924120:web:e676e5e7027fa92566e62d",
-  measurementId: "G-HLEWQJ7977"
+  apiKey: "AIzaSyCkPxECvIMK-p4ClLzSSgQmT23LDF9_paM",
+  authDomain: "softlib-1b4db.firebaseapp.com",
+  projectId: "softlib-1b4db",
+  storageBucket: "softlib-1b4db.firebasestorage.app",
+  messagingSenderId: "450565788691",
+  appId: "1:450565788691:web:52ed2de8abe7a713c89be6",
+  measurementId: "G-KPFTMLMWB4"
 };
 
 const app = initializeApp(firebaseConfig);
